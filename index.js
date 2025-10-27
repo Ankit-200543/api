@@ -9,6 +9,14 @@ app.get("/",(req,res)=>{
     console.log("This Is Request No"+RequestNo);
     res.send("Hello fello Users ! You are Number "+RequestNo)
 })
+io.on("connection", (socket) => {
+  console.log("User connected:", socket.id);
+
+  socket.on("chat message", (msg) => {
+    console.log("Message:", msg);
+    io.emit("chat message", msg);
+  });
+});
 
 app.listen(port,()=>{
     console.log("server Is started")
