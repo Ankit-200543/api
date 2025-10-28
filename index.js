@@ -16,6 +16,20 @@ app.get("/", (req, res) => {
   res.send("Hello fellow Users! You are number " + RequestNo);
 });
 
+
+
+
+app.get("/login/:username/:password", (req, res) => {
+  const { username, password } = req.params;
+
+  // Example logic (you can replace this with DB validation)
+  if (username === "ankit" && password === "1234") {
+    res.send("Login successful! Welcome " + username);
+  } else {
+    res.send("Invalid username or password");
+  }
+});
+
 // Socket.IO part
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
