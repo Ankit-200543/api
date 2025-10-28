@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 
 app.get("/login/:username/:password", (req, res) => {
   const { username, password } = req.params;
+  console.log("one login request has arrived")
 
   // Example logic (you can replace this with DB validation)
   if (username === "ankit" && password === "1234") {
