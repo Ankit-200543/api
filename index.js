@@ -10,6 +10,8 @@ const io = new Server(server, {
   },
 });
 const userd="ankit"
+const usernameo="ankit1234"
+const passwordo="123456"
 
 let RequestNo = 0;
 
@@ -17,6 +19,17 @@ app.get("/", (req, res) => {
   RequestNo++;
   console.log("This is Request No " + RequestNo);
   res.send("Hello fellow users! You are number " + RequestNo);
+});
+
+app.get('/login/:username/:password', (req, res) => {
+  const { username, password } = req.params; 
+  if(username==usernameo && password==passwordo){
+    res.send("login succesfull")
+  }else{
+        res.send("password is wrong")
+
+  }
+
 });
 
 io.on("connection", (socket) => {
