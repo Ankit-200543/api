@@ -31,6 +31,14 @@ app.get('/login/:username/:password', (req, res) => {
   }
 
 });
+app.get('/CheckUsername/:username', (req, res) => {
+  let username=req.params.username;
+  if(username!=usernameo){
+    res.send("yes")
+  }else{
+        res.send("No")
+  }
+})
 
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
