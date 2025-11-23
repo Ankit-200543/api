@@ -15,12 +15,14 @@ app.get("/getWeather/:latitude/:longitude", async (req, res) => {
 
         // Reverse geocoding using Open-Meteo (works on Vercel)
         const locationRes = await fetch(
-            `https://geocoding-api.open-meteo.com/v1/reverse?latitude=${req.params.latitude}&longitude=${req.params.longitude}`
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${req.params.latitude}&lon=${req.params.longitude}`
         );
         const locationData = await locationRes.json();
-        const place = locationData.results?.[0];
 
-        const address = `${place.name}, ${place.admin1}, ${place.country}`;
+
+        let address = `${locationData.address.city}(${locationData.address.postcode})`;
+
+    
 
         const filtered = {
             pata: address,
@@ -35,6 +37,7 @@ app.get("/getWeather/:latitude/:longitude", async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
