@@ -13,19 +13,11 @@ app.get("/getWeather/:latitude/:longitude", async (req, res) => {
         );
         const weatherData = await weatherInfo.json();
 
-        // Reverse geocoding using Open-Meteo (works on Vercel)
-        const locationRes = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${req.params.latitude}&lon=${req.params.longitude}`
-        );
-        const locationData = await locationRes.json();
 
-
-        let address = `${locationData.address.city}(${locationData.address.postcode})`;
 
     
 
         const filtered = {
-            pata: address,
             Temperature: weatherData.current.temperature_2m,
             windSpeed: weatherData.current.wind_speed_10m,
             Humidity: weatherData.current.relative_humidity_2m
